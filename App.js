@@ -9,12 +9,16 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 import {StyleSheet} from 'react-native';
+import Navbar from './src/components/Navbar';
 
 const App = () => {
   return (
-    <View style={styles.Main}>
-      <Text>Instalações Geográficas</Text>
-    </View>
+    <>
+      <Navbar />
+      <View style={styles.Main}>
+        <Text>Instalações Geográficas</Text>
+      </View>
+    </>
   );
 };
 
