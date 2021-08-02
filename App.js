@@ -7,23 +7,13 @@
  */
 
 import React from 'react';
-import {View, Text} from 'react-native';
-import {StyleSheet} from 'react-native';
+
+import Routes from './src/routes';
 
 const App = () => {
   return (
-    <View style={styles.Main}>
-      <Text>Instalações Geográficas</Text>
-    </View>
+    <Routes />
   );
 };
-
-const styles = StyleSheet.create({
-  Main: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export default App;
