@@ -6,12 +6,16 @@ export const TitleContent = styled.View`
     display: flex;
     flex-direction: column;
     margin: 20px;
+    margin-bottom: 5px;
 `;
 
 export const TitleText = styled.Text`
-    font-weight: bold;
     color: ${Colors.blackColor};
     font-size: 24px;
+    font-family: 'NotoSansJP-Bold';
+    justify-content: center;
+    align-items: center;
+    height: 50px;
 `;
 
 export const Underline = styled.View`
