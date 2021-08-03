@@ -9,7 +9,7 @@ const PageComponent = ({title,text,nextPage}) => {
     return (
         <Main>
             <Navbar />
-            <MainScrollView>
+            <MainScrollView overScrollMode="always">
                 <TextContainer>
                     <Title title={title}/>
                     <TextArea>{text}</TextArea>

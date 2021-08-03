@@ -11,7 +11,7 @@ const Home = () => {
                 “Geográficas e Educação de Surdos: uma contribuição ao ensino e a
                 aprendizagem da Geografia na Escola de Ensino Fundamental Centro Educacional de Mauriti – CEM, no município de Mauriti/CE”, realizado no Programa de Mestrado Profissional em Educação da Universidade Regional do
                 Cariri- URCA."
-            nextPage="Instalações Geograficas"
+            nextPage="Instalações Geográficas"
         />
     );
 };

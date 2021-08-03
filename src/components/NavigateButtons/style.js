@@ -10,6 +10,7 @@ export const ButtonsArea = styled.View`
     bottom: 0;
     justify-content: center;
     align-items: center;
+    background-color: #FFF;
 `;
 
 export const ButtonsContent = styled.View`

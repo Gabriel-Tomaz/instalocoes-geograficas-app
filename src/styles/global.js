@@ -17,7 +17,6 @@ export const MainScrollView = styled.ScrollView.attrs(() => ({
 }))`
     width: 100%;
     height: 100%;
-    margin-top: 70px;
     background-color: #FFF;
 `;
 
