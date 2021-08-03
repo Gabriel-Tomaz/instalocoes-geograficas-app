@@ -12,10 +12,9 @@ export const TitleContent = styled.View`
 export const TitleText = styled.Text`
     color: ${Colors.blackColor};
     font-size: 24px;
-    font-family: 'NotoSansJP-Bold';
+    font-family: 'NotoSans-Bold';
     justify-content: center;
     align-items: center;
-    height: 50px;
 `;
 
 export const Underline = styled.View`
