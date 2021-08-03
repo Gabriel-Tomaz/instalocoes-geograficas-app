@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import {useNavigation} from '@react-navigation/core';
@@ -12,7 +13,7 @@ const Navbar = () => {
         <NavBody>
             <NavContent>
                 <MenuButton onPress={() => {navigation.openDrawer()}}>
-                    <Icon name="navicon" size={40} color={Colors.secondaryColor}></Icon>
+                    <Icon name="navicon" size={35} color={Colors.secondaryColor}></Icon>
                 </MenuButton>
             </NavContent>
         </NavBody>

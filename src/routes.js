@@ -8,6 +8,7 @@ import Colors from './styles/colors';
 
 import Home from './pages/Home';
 import Summary from './pages/Summary';
+import { Text, View } from 'react-native';
 
 
 export const Routes = () => {
@@ -18,6 +19,8 @@ export const Routes = () => {
         drawerItemStyle:{
             width: 85 + '%',
             backfaceVisibility: 'hidden',
+            height: 50,
+            marginBottom: 0,
         },
         drawerLabelStyle: {
             color: `${Colors.blackColor}`,
