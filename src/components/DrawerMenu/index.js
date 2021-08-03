@@ -3,12 +3,14 @@ import React from 'react';
 import {DrawerItemList} from '@react-navigation/drawer';
 
 import Title from '../Title';
-import {DrawerBody} from './style';
+import {DrawerBody,DrawerHeader} from './style';
 
 const DrawerMenu = (props) => {
     return(
         <DrawerBody>
-            <Title title="Menu" />
+            <DrawerHeader>
+                <Title title="Menu" />
+            </DrawerHeader>
             <DrawerItemList {...props}/>
         </DrawerBody>
     );
