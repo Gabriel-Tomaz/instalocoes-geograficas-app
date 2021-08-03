@@ -6,5 +6,9 @@ export const DrawerBody = styled.View`
     flex: 1;
     flex-direction: column;
     align-items: flex-start;
-    background-color: ${Colors.grayColor}
+    background-color: ${Colors.grayColor};
+`;
+
+export const DrawerHeader = styled.View`
+    margin: 20px;
 `;
