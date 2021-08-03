@@ -1,14 +1,18 @@
 import React from 'react';
 import {Text} from 'react-native';
 
-import {Main} from '../../styles/global';
+import {Main, MainScrollView} from '../../styles/global';
 import Navbar from '../../components/Navbar';
+import NavigateButtons from '../../components/NavigateButtons';
 
 const Home = () => {
     return (
         <Main>
             <Navbar />
-            <Text>Home</Text>
+            <MainScrollView>
+                <Text>Home</Text>
+            </MainScrollView>
+            <NavigateButtons />
         </Main>
     );
 };
