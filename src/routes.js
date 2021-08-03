@@ -8,7 +8,7 @@ import Colors from './styles/colors';
 
 import Home from './pages/Home';
 import Summary from './pages/Summary';
-import { Text, View } from 'react-native';
+import GeographicFacilities from './pages/GeographicFacilities';
 
 
 export const Routes = () => {
@@ -39,6 +39,7 @@ export const Routes = () => {
             >
                 <Drawer.Screen name="Sumário" component={Summary} />
                 <Drawer.Screen name="Início" component={Home} />
+                <Drawer.Screen name="Instalações Geográficas" component={GeographicFacilities} />
             </Drawer.Navigator>
         </NavigationContainer>
     );
