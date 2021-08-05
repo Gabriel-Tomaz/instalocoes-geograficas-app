@@ -9,6 +9,7 @@ export const NavBody = styled.View`
     top: 0;
     left: 0;
     z-index: 10;
+    background-color: #FFF;
 `;
 
 export const NavContent = styled.View`

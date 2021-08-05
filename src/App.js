@@ -9,10 +9,13 @@
 import React from 'react';
 
 import Routes from './routes';
+import { PageProvider } from './Context/PageContext';
 
 const App = () => {
   return (
-    <Routes />
+    <PageProvider>
+      <Routes />
+    </PageProvider>
   );
 };
 
