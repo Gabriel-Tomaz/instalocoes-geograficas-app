@@ -13,7 +13,7 @@ export const MainScrollView = styled.ScrollView.attrs(() => ({
         alignItems: 'center',
         flexGrow: 1, 
         justifyContent: 'center',
-      },
+      }
 }))`
     width: 100%;
     height: 100%;
@@ -30,6 +30,12 @@ export const TextContainer = styled.View`
 export const TextArea = styled.Text`
     width: 100%;
     font-family: 'NotoSerif-Regular';
+    font-size: 18px;
+    margin-top: 10px;
+`;
+
+export const SubTitle = styled.Text`
+    font-family: 'NotoSans-Bold';
     font-size: 18px;
     margin-top: 10px;
 `;

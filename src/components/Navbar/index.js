@@ -7,12 +7,11 @@ import {NavBody, NavContent, MenuButton} from './style';
 import Colors from '../../styles/colors';
 
 const Navbar = () => {
-    const navigation = useNavigation();
 
     return(
         <NavBody>
             <NavContent>
-                <MenuButton onPress={() => {navigation.openDrawer()}}>
+                <MenuButton>
                     <Icon name="navicon" size={35} color={Colors.secondaryColor}></Icon>
                 </MenuButton>
             </NavContent>
