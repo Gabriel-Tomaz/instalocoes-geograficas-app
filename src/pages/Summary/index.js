@@ -12,19 +12,12 @@ import topics from '../../utils/topics';
 
 const Summary = () => {
     const navigation = useNavigation('');
-    const {setPreviousPage} = useContext(PageContext);
-
-    function goTo(page){
-        setPreviousPage('Sumário');
-        navigation.navigate(page);
-    }
 
     return (
         <Main>
-            <Navbar />
-            <MainScrollView style={{marginTop: 70}}>
+            <MainScrollView style={{marginTop: 10}}>
                 {topics.map(topic => (
-                    <SummaryItem key={topic.id} onPress={() => {goTo(topic.title)}}>
+                    <SummaryItem key={topic.id} onPress={() => {navigation.navigate(topic.title)}}>
                         <SummaryTitle>{topic.title}</SummaryTitle>
                         <SummaryAbstract>{topic.abstract}</SummaryAbstract>
                 </SummaryItem>

@@ -8,7 +8,6 @@ import NavigateButtons from '../../components/NavigateButtons';
 const PageComponent = ({title,text,nextPage}) => {
     return (
         <Main>
-            <Navbar />
             <MainScrollView overScrollMode="always">
                 <TextContainer>
                     <Title title={title}/>
