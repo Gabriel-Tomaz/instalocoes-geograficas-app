@@ -47,7 +47,7 @@ const MethodologicalSteps = () => {
                     </TextArea>
                 </TextContainer>
             </MainScrollView>
-            <NavigateButtons />
+            <NavigateButtons next='Passos metodológicos - Montagem'/>
         </Main>
     );
 };
