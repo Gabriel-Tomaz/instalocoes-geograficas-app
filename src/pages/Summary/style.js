@@ -15,7 +15,7 @@ export const SummaryItem = styled.TouchableOpacity`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-top: 10px;
+    margin-top: 20px;
     margin-bottom: 20px;
 `;
 

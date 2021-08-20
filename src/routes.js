@@ -11,6 +11,7 @@ import Home from './pages/Home';
 import Summary from './pages/Summary';
 import GeographicFacilities from './pages/GeographicFacilities';
 import MethodologicalSteps from './pages/MethodologicalSteps';
+import Mount from './pages/Mount';
 
 
 export const Routes = () => {
@@ -41,6 +42,7 @@ export const Routes = () => {
                 <Stack.Screen name="Início" component={Home} />
                 <Stack.Screen name="Instalações Geográficas" component={GeographicFacilities} />
                 <Stack.Screen name="Passos metodológicos" component={MethodologicalSteps} />
+                <Stack.Screen name="Passos metodológicos - Montagem" component={Mount} />
             </Stack.Navigator>
         </NavigationContainer>
     );
