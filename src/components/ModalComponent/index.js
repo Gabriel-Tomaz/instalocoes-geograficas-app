@@ -16,7 +16,7 @@ const ModalComponent = ({id, visible, hideModal}) => {
         >
             <View style={{flex: 1, justifyContent: 'center'}}>
                 <View style={{padding: 16, backgroundColor: '#FFF'}}>
-                    <TouchableOpacity onPress={hideModal}>
+                    <TouchableOpacity onPress={hideModal} style={{alignSelf: 'flex-end'}}>
                         <Icon name="close" color="#000" size={28}/>
                     </TouchableOpacity>
 
@@ -54,7 +54,6 @@ const ModalComponent = ({id, visible, hideModal}) => {
                                 flexWrap: 'wrap', 
                                 marginBottom: 5, 
                             }}
-                            key={moutItems[id]}
                             >
                                 <Text style={{fontFamily:'NotoSans-Bold', fontSize: 14}}>{item.item_name}: </Text>
                                 <Text style={{fontFamily:'NotoSans-Regular', fontSize: 14}}>{item.representation}</Text>
