@@ -14,14 +14,17 @@ const texts = [
         title: 'Passos metodológicos',
         topics: [
             {
+                id: 1,
                 subTitle: 'Planejamento e Conteúdo',
                 topicText: `De posse do currículo e do conteúdo, começamos a idealizar o trabalhar para materializar esse conhecimento numa Instalação Geográfica.${'\n\n'}Assim nos colocamos a pensar e escolher os procedimentos didáticos para auxiliar na mediação do conteúdo, de modo que proporcionasse a compreensão pelos alunos.`
             },
             {
+                id: 2,
                 subTitle: 'Procedimento e Ideia',
                 topicText: 'No decorrer da nossa explanação do conteúdo (consumo e meio ambiente) propomos aos alunos a realização de uma Instalação Geográfica como forma de avaliação.',
             },
             {
+                id: 3,
                 subTitle: 'Ponto Crucial e Teia de Ideias',
                 topicText: `Lançamos uma atividade de pesquisa aos alunos sobre o conteúdo que estava sendo trabalhado. A pesquisa contribuiu para o aprofundamento do conteúdo trabalhado, bem como estimularia a curiosidade e a criatividade dos alunos. Fazendo que todo esse processo estivesse alinhado às experiências cotidianas dos alunos, pois é daí que sairiam os materiais que iriam compor a instalação.${'\n\n'}Instigamos o debate com os alunos, aonde foram discutidas as ideias suscitadas com a pesquisa, bem como, a escolha dos objetos para materializar a instalação.`
             },
@@ -32,6 +35,7 @@ const texts = [
         title: 'Passos metodológicos',
         topics: [
            {
+                id: 4,
                 subTitle: 'Montagem',
                 topicText: 'Após o debate dos textos e definição dos objetos para materializar a instalação, nos preparamos para o dia da montagem e exposição da instalação (que aconteceu de forma virtual). Neste momento solicitamos aos alunos que refizessem o texto para ser entregue ao final de todo o processo.'
            }

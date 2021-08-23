@@ -3,10 +3,8 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 
-
 import Summary from './pages/Summary';
 import Principal from './pages/Principal';
-
 
 export const Routes = () => {
     const Stack = createStackNavigator();

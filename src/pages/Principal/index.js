@@ -81,8 +81,8 @@ const Principal = () => {
         <View style={{flex: 1, backgroundColor: '#FFF'}}>
             <TabView value={index}>
             {texts.map(item => (
-                <ScrollView contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}>
-                        <TabView.Item key={item.id}>
+                <ScrollView contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}  key={item.id}>
+                        <TabView.Item  key={item.id}>
                             <View style={{flex: 1, padding: 16}}>
                                 <View style={{alignSelf: 'flex-start'}}>
                                     <Title title={item.title}/>
@@ -96,7 +96,7 @@ const Principal = () => {
                                 </Text>
                                 {item.topics ? (
                                     item.topics.map(topic => (
-                                       <>
+                                       <View key={topic.id}>
                                             <Text 
                                                 style={{
                                                     fontFamily: 'NotoSans-Bold',
@@ -116,7 +116,7 @@ const Principal = () => {
                                             >
                                                 {topic.topicText}
                                             </Text>
-                                       </>
+                                       </View>
                                     ))
                                 ): null}
                                 {item.objects ? (
@@ -137,6 +137,8 @@ const Principal = () => {
                                                 setCurrentID(object.id-1);
                                                 setIsVisible(!isVisible);
                                             }}
+
+                                            key={object.id}
                                        >
                                            <View style={{marginBottom: 15}}>
                                                <Image source={object.imgGray} style={{ maxWidth: '100%',height: 156}}/>
