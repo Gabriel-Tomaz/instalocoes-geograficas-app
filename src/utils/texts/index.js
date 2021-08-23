@@ -213,6 +213,40 @@ const texts = [
                 imgGray: require('../../assets/img/tumb7.png')
             },
         ]
+    },
+    {
+        id: 5,
+        title: 'Passos metodológicos',
+        topics: [
+            {
+                id: 5,
+                subTitle: 'Desmonte',
+                topicText: 'Após a apresentação das instalações, os alunos entregaram o segundo texto solicitado. Nesses textos, os alunos expuseram suas reflexões sobre o percurso de desenvolvimento da instalação, destacando os pontos positivos e negativos. Assim, poderíamos avaliar se o conteúdo e os objetivos de aprendizagem foram atingidos pelos alunos.'
+            }
+        ]
+    },
+    {
+        id: 6,
+        title: 'Metodologia e resultados',
+        text: `Evidenciamos que em todo o desenvolvimento da metodologia o aluno Surdo e os demais alunos participaram de forma significativa, corroborando para um ensino criativo, crítico e colaborativo. A partir dos procedimentos metodológicos, sobretudo dos os elementos de representação da metodologia, (signos e símbolos), foi possível perceber a contribuição destes para a formação de conceitos pelo aluno Surdo valorizando assim as experiências visuais do mesmo e dos ouvintes.${'\n\n'}Neste processo dialético proposto pela a metodologia todos os alunos, exercitaram a criticidade e a criatividade, diante do conteúdo trabalhado. As Instalações Geográficas a partir da tríade: reflexão, criação e materialização, contribuiu para tornar o conhecimento dinâmico, valorizando a diversidade entre os sujeitos e suas experiências visuais, fazendo cada um perceber-se como agente modelador do espaço e do seu próprio conhecimento.${'\n\n'}Consideramos, portanto, que as Instalações Geográficas ao valorizar as experiências visuais do aluno Surdo e dos demais alunos, sendo pautada, sobretudo pelo viés artístico, contribui para mudanças positivas no ensino e na aprendizagem dos conteúdos geográficos, fomentando desta forma nos alunos um pensamento emancipatório, bem como, mudanças nas práticas pedagógicas.`
+    },
+    {
+        id: 7,
+        title: 'Autores',
+        authors: [
+            {
+                id: 1,
+                name: 'Gabriel Emanuel Leite de Lima',
+                abstract:'Professor da rede estadual de ensino do Estado do Ceará, SEDUC.',
+                link: 'http://lattes.cnpq.br/3970076445418510'
+            },
+            {
+                id: 2,
+                name: 'Dr. Emerson Ribeiro',
+                abstract: 'Professor Adjunto do Departamento de Geociências e do Mestrado Profissional em Educação da Universidade Regional do Cariri - URCA/CE e Professor do quadro permanente do Programa de Pós-graduação em Geografia da Universidade Federal da Paraíba – UFPB/PB.',
+                link: 'http://lattes.cnpq.br/6808110433438335'
+            }
+        ]
     }
 ];
 

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { View, ScrollView, TouchableOpacity,Text, Image } from 'react-native';
+import { View, ScrollView, TouchableOpacity,Text, Image, Linking } from 'react-native';
 import {Tab, Icon, TabView} from 'react-native-elements';
 
 import ModalComponent from '../../components/ModalComponent';
@@ -87,10 +87,13 @@ const Principal = () => {
                                 <View style={{alignSelf: 'flex-start'}}>
                                     <Title title={item.title}/>
                                 </View>
-                                <Text style={{
-                                    fontFamily: 'NotoSerif-Regular', 
-                                    fontSize: 18, textAlign: 'left', 
-                                    marginTop: 15}}
+                                <Text 
+                                    style={{
+                                        fontFamily: 'NotoSerif-Regular', 
+                                        fontSize: 18, 
+                                        textAlign: 'left',
+                                        marginTop: item.topics || item.authors ? -5 : 20
+                                    }}
                                 >
                                     {item.text}
                                 </Text>
@@ -148,6 +151,27 @@ const Principal = () => {
                                                fontSize: 16,
                                            }}>{object.title}</Text>
                                        </TouchableOpacity>
+                                    ))
+                                ) : null}
+
+                                {item.authors ? (
+                                    item.authors.map(author => (
+                                        <View key={author.id} style={{marginBottom: 20}}>
+                                            <Text style={{fontFamily: 'NotoSerif-Bold', fontSize: 18}}>{author.name}</Text>
+                                            <Text style={{fontFamily: 'NotoSerif-Regular', fontSize: 18}}>{author.abstract}</Text>
+                                            <TouchableOpacity onPress={() => Linking.openURL(`${author.link}`)} style={{marginTop: 15}}> 
+                                                <Text 
+                                                    style={{
+                                                        fontFamily: 'NotoSerif-Regular',
+                                                        fontSize: 18,
+                                                        textDecorationLine: 'underline',
+                                                        color: Colors.secondaryColor,
+                                                    }}
+                                                >
+                                                    {author.link}
+                                                </Text>
+                                            </TouchableOpacity>
+                                        </View>
                                     ))
                                 ) : null}
                             </View>

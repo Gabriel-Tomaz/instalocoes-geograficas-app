@@ -5,7 +5,6 @@ import Colors from "../../styles/colors";
 export const TitleContent = styled.View`
     display: flex;
     flex-direction: column;
-    margin-bottom: 5px;
 `;
 
 export const TitleText = styled.Text`
