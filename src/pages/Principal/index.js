@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import { View, ScrollView, TouchableOpacity,Text, Image, Linking } from 'react-native';
 import {Tab, Icon, TabView} from 'react-native-elements';
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+
 
 import ModalComponent from '../../components/ModalComponent';
 import Header from '../../components/Header';
@@ -12,6 +14,9 @@ const Principal = ({navigation, route}) => {
     const [index,setIndex] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
     const [currentID,setCurrentID] = useState(0);
+    const [gesture, setGesture] = useState({
+        name: null,
+    })
 
     const {tab} = route.params;
     
@@ -34,6 +39,21 @@ const Principal = ({navigation, route}) => {
             navigation.goBack();
         }
     };
+
+    const onSwipeRight = (gesture) => {
+        if(index !== 0){
+            setIndex(index-1);
+        }
+        if(index === 0){
+            navigation.goBack();
+        }
+    }
+
+    const onSwipeLeft = (gesture) => {
+        if(index < texts.length){
+            setIndex(index+1);
+        }
+    }
 
     const renderNextButton = () => {
         return(
@@ -92,106 +112,112 @@ const Principal = ({navigation, route}) => {
     return (
         <View style={{flex: 1, backgroundColor: '#FFF'}}>
             <Header />
-            <TabView value={index}>
-            {texts.map(item => (
-                <ScrollView contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}  key={item.id}>
-                        <TabView.Item  key={item.id}>
-                            <View style={{flex: 1, padding: 20}}>
-                                <View style={{alignSelf: 'flex-start'}}>
-                                    <Title title={item.title}/>
-                                </View>
-                                <Text 
-                                    style={{
-                                        fontFamily: 'NotoSerif-Regular', 
-                                        fontSize: 18, 
-                                        textAlign: 'left',
-                                        marginTop: item.topics || item.authors ? -5 : 20
-                                    }}
-                                >
-                                    {item.text}
-                                </Text>
-                                {item.topics ? (
-                                    item.topics.map(topic => (
-                                       <View key={topic.id}>
-                                            <Text 
-                                                style={{
-                                                    fontFamily: 'NotoSans-Bold',
-                                                    fontSize: 18,
-                                                  
-                                                }}
-                                            >
-                                                {topic.subTitle}
-                                            </Text>
-                                            <Text
-                                                style={{
-                                                    fontFamily: 'NotoSerif-Regular', 
-                                                    fontSize: 18, 
-                                                    textAlign: 'left', 
-                                                    marginTop: 15
-                                                }}
-                                            >
-                                                {topic.topicText}
-                                            </Text>
-                                       </View>
-                                    ))
-                                ): null}
-                                {item.objects ? (
-                                    item.objects.map(object => (
-                                       <TouchableOpacity 
-                                            style={{
-                                                backgroundColor: Colors.grayColor,
-                                                padding: 16,
-                                                marginTop: 20,
-                                                borderColor: '#ddd',
-                                                shadowColor: '#000',
-                                                shadowOpacity: 0.1,
-                                                elevation: 2,
-                                                borderBottomWidth: 0,
-                                            }}
-
-                                            onPress={() => {
-                                                setCurrentID(object.id-1);
-                                                setIsVisible(!isVisible);
-                                            }}
-
-                                            key={object.id}
-                                       >
-                                           <View style={{marginBottom: 15}}>
-                                               <Image source={object.imgGray} style={{ maxWidth: '100%',height: 156}}/>
-                                           </View>
-                                           <Text style={{
-                                               fontFamily: 'NotoSans-Bold',
-                                               fontSize: 16,
-                                           }}>{object.title}</Text>
-                                       </TouchableOpacity>
-                                    ))
-                                ) : null}
-
-                                {item.authors ? (
-                                    item.authors.map(author => (
-                                        <View key={author.id} style={{marginBottom: 20}}>
-                                            <Text style={{fontFamily: 'NotoSerif-Bold', fontSize: 18}}>{author.name}</Text>
-                                            <Text style={{fontFamily: 'NotoSerif-Regular', fontSize: 18}}>{author.abstract}</Text>
-                                            <TouchableOpacity onPress={() => Linking.openURL(`${author.link}`)} style={{marginTop: 15}}> 
+            <GestureRecognizer
+                style={{flex: 1}}
+                onSwipeLeft={onSwipeLeft}
+                onSwipeRight={onSwipeRight}
+            >
+                <TabView value={index}>
+                {texts.map(item => (
+                    <ScrollView contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}  key={item.id}>
+                            <TabView.Item  key={item.id}>
+                                <View style={{flex: 1, padding: 20}}>
+                                    <View style={{alignSelf: 'flex-start'}}>
+                                        <Title title={item.title}/>
+                                    </View>
+                                    <Text 
+                                        style={{
+                                            fontFamily: 'NotoSerif-Regular', 
+                                            fontSize: 18, 
+                                            textAlign: 'left',
+                                            marginTop: item.topics || item.authors ? -5 : 20
+                                        }}
+                                    >
+                                        {item.text}
+                                    </Text>
+                                    {item.topics ? (
+                                        item.topics.map(topic => (
+                                        <View key={topic.id}>
                                                 <Text 
                                                     style={{
-                                                        fontFamily: 'NotoSerif-Regular',
+                                                        fontFamily: 'NotoSans-Bold',
                                                         fontSize: 18,
-                                                        textDecorationLine: 'underline',
-                                                        color: Colors.secondaryColor,
+                                                    
                                                     }}
                                                 >
-                                                    {author.link}
+                                                    {topic.subTitle}
                                                 </Text>
-                                            </TouchableOpacity>
+                                                <Text
+                                                    style={{
+                                                        fontFamily: 'NotoSerif-Regular', 
+                                                        fontSize: 18, 
+                                                        textAlign: 'left', 
+                                                        marginTop: 15
+                                                    }}
+                                                >
+                                                    {topic.topicText}
+                                                </Text>
                                         </View>
-                                    ))
-                                ) : null}
-                            </View>
-                        </TabView.Item>
-                </ScrollView>
-             ))}
-            </TabView>
+                                        ))
+                                    ): null}
+                                    {item.objects ? (
+                                        item.objects.map(object => (
+                                        <TouchableOpacity 
+                                                style={{
+                                                    backgroundColor: Colors.grayColor,
+                                                    padding: 16,
+                                                    marginTop: 20,
+                                                    borderColor: '#ddd',
+                                                    shadowColor: '#000',
+                                                    shadowOpacity: 0.1,
+                                                    elevation: 2,
+                                                    borderBottomWidth: 0,
+                                                }}
+
+                                                onPress={() => {
+                                                    setCurrentID(object.id-1);
+                                                    setIsVisible(!isVisible);
+                                                }}
+
+                                                key={object.id}
+                                        >
+                                            <View style={{marginBottom: 15}}>
+                                                <Image source={object.imgGray} style={{ maxWidth: '100%',height: 156}}/>
+                                            </View>
+                                            <Text style={{
+                                                fontFamily: 'NotoSans-Bold',
+                                                fontSize: 16,
+                                            }}>{object.title}</Text>
+                                        </TouchableOpacity>
+                                        ))
+                                    ) : null}
+
+                                    {item.authors ? (
+                                        item.authors.map(author => (
+                                            <View key={author.id} style={{marginBottom: 20}}>
+                                                <Text style={{fontFamily: 'NotoSerif-Bold', fontSize: 18}}>{author.name}</Text>
+                                                <Text style={{fontFamily: 'NotoSerif-Regular', fontSize: 18}}>{author.abstract}</Text>
+                                                <TouchableOpacity onPress={() => Linking.openURL(`${author.link}`)} style={{marginTop: 15}}> 
+                                                    <Text 
+                                                        style={{
+                                                            fontFamily: 'NotoSerif-Regular',
+                                                            fontSize: 18,
+                                                            textDecorationLine: 'underline',
+                                                            color: Colors.secondaryColor,
+                                                        }}
+                                                    >
+                                                        {author.link}
+                                                    </Text>
+                                                </TouchableOpacity>
+                                            </View>
+                                        ))
+                                    ) : null}
+                                </View>
+                            </TabView.Item>
+                    </ScrollView>
+                ))}
+                </TabView>
+            </GestureRecognizer>
             <View style={{padding: 16}}>
                 <Tab value={index} disableIndicator>
                     <Tab.Item 
