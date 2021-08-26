@@ -1,20 +1,23 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
 
 import Summary from './pages/Summary';
 import Principal from './pages/Principal';
 
+import Menu from './components/Menu';
+
 export const Routes = () => {
-    const Stack = createStackNavigator();
+    const Drawer = createDrawerNavigator();
+
 
     return(
         <NavigationContainer>
-            <Stack.Navigator screenOptions={{headerShown:false}}>
-                <Stack.Screen name="Principal" component={Principal} />
-                <Stack.Screen name="Sumário" component={Summary} />
-            </Stack.Navigator>
+            <Drawer.Navigator screenOptions={{headerShown:false}} drawerContent={props => <Menu {...props}/>}>
+                <Drawer.Screen name="Sumário" component={Summary} />
+                <Drawer.Screen name="Principal" component={Principal} />
+            </Drawer.Navigator>
         </NavigationContainer>
     );
 };
