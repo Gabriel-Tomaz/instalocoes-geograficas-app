@@ -1,16 +1,25 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { View, ScrollView, TouchableOpacity,Text, Image, Linking } from 'react-native';
 import {Tab, Icon, TabView} from 'react-native-elements';
 
 import ModalComponent from '../../components/ModalComponent';
+import Header from '../../components/Header';
 import Title from '../../components/Title';
 import Colors from '../../styles/colors';
 import texts from '../../utils/texts';
 
-const Principal = () => {
+const Principal = ({navigation, route}) => {
     const [index,setIndex] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
     const [currentID,setCurrentID] = useState(0);
+
+    const {tab} = route.params;
+    
+    useEffect(() => {
+        if(tab){
+            setIndex(tab-1);
+        }
+    }, [tab])
 
     const nextTab = () => {
         if(index < texts.length){
@@ -20,6 +29,9 @@ const Principal = () => {
     const previousTab = () => {
         if(index !== 0){
             setIndex(index-1);
+        }
+        if(index === 0){
+            navigation.goBack();
         }
     };
 
@@ -79,11 +91,12 @@ const Principal = () => {
 
     return (
         <View style={{flex: 1, backgroundColor: '#FFF'}}>
+            <Header />
             <TabView value={index}>
             {texts.map(item => (
                 <ScrollView contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}  key={item.id}>
                         <TabView.Item  key={item.id}>
-                            <View style={{flex: 1, padding: 16}}>
+                            <View style={{flex: 1, padding: 20}}>
                                 <View style={{alignSelf: 'flex-start'}}>
                                     <Title title={item.title}/>
                                 </View>
