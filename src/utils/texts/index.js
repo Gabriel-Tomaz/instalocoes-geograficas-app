@@ -32,14 +32,8 @@ const texts = [
     },
     {
         id: 4,
-        title: 'Passos metodológicos',
-        topics: [
-           {
-                id: 4,
-                subTitle: 'Montagem',
-                topicText: 'Após o debate dos textos e definição dos objetos para materializar a instalação, nos preparamos para o dia da montagem e exposição da instalação (que aconteceu de forma virtual). Neste momento solicitamos aos alunos que refizessem o texto para ser entregue ao final de todo o processo.'
-           }
-        ],
+        title: 'Montagem',
+        text: 'Após o debate dos textos e definição dos objetos para materializar a instalação, nos preparamos para o dia da montagem e exposição da instalação (que aconteceu de forma virtual). Neste momento solicitamos aos alunos que refizessem o texto para ser entregue ao final de todo o processo.',
         objects: [
             {
                 id:1,
@@ -216,14 +210,8 @@ const texts = [
     },
     {
         id: 5,
-        title: 'Passos metodológicos',
-        topics: [
-            {
-                id: 5,
-                subTitle: 'Desmonte',
-                topicText: 'Após a apresentação das instalações, os alunos entregaram o segundo texto solicitado. Nesses textos, os alunos expuseram suas reflexões sobre o percurso de desenvolvimento da instalação, destacando os pontos positivos e negativos. Assim, poderíamos avaliar se o conteúdo e os objetivos de aprendizagem foram atingidos pelos alunos.'
-            }
-        ]
+        title: 'Desmonte',
+        text: 'Após a apresentação das instalações, os alunos entregaram o segundo texto solicitado. Nesses textos, os alunos expuseram suas reflexões sobre o percurso de desenvolvimento da instalação, destacando os pontos positivos e negativos. Assim, poderíamos avaliar se o conteúdo e os objetivos de aprendizagem foram atingidos pelos alunos.'
     },
     {
         id: 6,

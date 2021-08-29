@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { View, ScrollView, TouchableOpacity,Text, Image, Linking } from 'react-native';
 import {Tab, Icon, TabView} from 'react-native-elements';
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+import GestureRecognizer from 'react-native-swipe-gestures';
 
 
 import ModalComponent from '../../components/ModalComponent';
@@ -14,10 +14,6 @@ const Principal = ({navigation, route}) => {
     const [index,setIndex] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
     const [currentID,setCurrentID] = useState(0);
-    const [gesture, setGesture] = useState({
-        name: null,
-    })
-
     const {tab} = route.params;
     
     useEffect(() => {
@@ -27,7 +23,7 @@ const Principal = ({navigation, route}) => {
     }, [tab])
 
     const nextTab = () => {
-        if(index < texts.length){
+        if(index < texts.length -1){
             setIndex(index+1);
         }
     };
@@ -40,7 +36,7 @@ const Principal = ({navigation, route}) => {
         }
     };
 
-    const onSwipeRight = (gesture) => {
+    const onSwipeRight = () => {
         if(index !== 0){
             setIndex(index-1);
         }
@@ -49,7 +45,7 @@ const Principal = ({navigation, route}) => {
         }
     }
 
-    const onSwipeLeft = (gesture) => {
+    const onSwipeLeft = () => {
         if(index < texts.length){
             setIndex(index+1);
         }
@@ -118,8 +114,8 @@ const Principal = ({navigation, route}) => {
                 onSwipeRight={onSwipeRight}
             >
                 <TabView value={index}>
-                {texts.map(item => (
-                    <ScrollView contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}  key={item.id}>
+                {texts.map((item, index) => (
+                    <ScrollView contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}  key={index}>
                             <TabView.Item  key={item.id}>
                                 <View style={{flex: 1, padding: 20}}>
                                     <View style={{alignSelf: 'flex-start'}}>
@@ -136,13 +132,12 @@ const Principal = ({navigation, route}) => {
                                         {item.text}
                                     </Text>
                                     {item.topics ? (
-                                        item.topics.map(topic => (
-                                        <View key={topic.id}>
+                                        item.topics.map((topic, index) => (
+                                        <View key={index}>
                                                 <Text 
                                                     style={{
                                                         fontFamily: 'NotoSans-Bold',
                                                         fontSize: 18,
-                                                    
                                                     }}
                                                 >
                                                     {topic.subTitle}

@@ -1,16 +1,23 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
+import { View, Text} from 'react-native';
 
-import {TitleContent, TitleText, Underline} from './style';
+import Colors from '../../styles/colors';
 
 const Title = ({title}) => {
     return(
-        <TitleContent>
-            <TitleText>
+        <View>
+            <Text 
+                style={{
+                    color: Colors.blackColor,
+                    fontFamily: 'NotoSans-Bold',
+                    fontSize: 24,
+                }}
+            >
                 {title}
-                </TitleText>
-            <Underline />
-        </TitleContent>
+            </Text>
+            <View style={{height: 5, backgroundColor: Colors.secondaryColor}} />
+        </View>
     );
 }
 
