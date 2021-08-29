@@ -3,10 +3,11 @@ import {View, Image,Text, TouchableOpacity} from 'react-native';
 import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/EvilIcons';
 
-import moutItems from '../../utils/mountItems';
+import texts from '../../utils/texts';
 
 const ModalComponent = ({id, visible, hideModal}) => {
-
+    const items = texts[3].objects;
+    
     return(
         <Modal 
             isVisible={visible} 
@@ -26,9 +27,9 @@ const ModalComponent = ({id, visible, hideModal}) => {
                             fontFamily: 'NotoSans-Bold',
                             marginTop: 20,
                             marginBottom: 15
-                        }}>{moutItems[id].title}</Text>
+                        }}>{items[id].title}</Text>
 
-                        <Image style={{ maxWidth: '100%',height: 240}} source={moutItems[id].img}/>
+                        <Image style={{ maxWidth: '100%',height: 240}} source={items[id].img}/>
 
                         <Text style={{
                             fontFamily:'NotoSans-Bold', 
@@ -48,8 +49,8 @@ const ModalComponent = ({id, visible, hideModal}) => {
                             Objetos representados e sua representação:
                         </Text>
                         
-                        {moutItems[id].objects.map(item => (
-                            <View style={{
+                        {items[id].objects.map((item, index) => (
+                            <View key={index} style={{
                                 flexDirection: 'row', 
                                 flexWrap: 'wrap', 
                                 marginBottom: 5, 

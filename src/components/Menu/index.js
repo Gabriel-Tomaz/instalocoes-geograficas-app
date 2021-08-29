@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 
 import Title from '../Title';
-import topics from '../../utils/topics';
+import texts from '../../utils/texts';
 
 const Menu = ({navigation}) => {
     return(
@@ -14,7 +14,6 @@ const Menu = ({navigation}) => {
                     <View style={{marginTop: 20}}>
                         <View 
                                 style={{
-                                  
                                     marginBottom: 10
                                 }}
                         >
@@ -29,14 +28,14 @@ const Menu = ({navigation}) => {
                                 </Text>
                             </TouchableOpacity>
                         </View>
-                        {topics.map(topic => (
-                            <View key={topic.id} 
+                        {texts.map((topic, index) => (
+                            <View key={index} 
                                 style={{
                                     paddingVertical: 10,
                                     marginBottom: 10
                                 }}
                             >
-                                <TouchableOpacity onPress={() => navigation.navigate('Principal', {tab: topic.id})}>
+                                <TouchableOpacity onPress={() => navigation.navigate('Principal', {tab: index+1})}>
                                     <Text 
                                         style={{
                                             fontSize: 18,
