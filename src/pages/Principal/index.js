@@ -46,7 +46,7 @@ const Principal = ({navigation, route}) => {
     }
 
     const onSwipeLeft = () => {
-        if(index < texts.length){
+        if(index < texts.length -1){
             setIndex(index+1);
         }
     }
@@ -156,7 +156,7 @@ const Principal = ({navigation, route}) => {
                                         ))
                                     ): null}
                                     {item.objects ? (
-                                        item.objects.map(object => (
+                                        item.objects.map((object, index) => (
                                         <TouchableOpacity 
                                                 style={{
                                                     backgroundColor: Colors.grayColor,
@@ -171,10 +171,10 @@ const Principal = ({navigation, route}) => {
 
                                                 onPress={() => {
                                                     setCurrentID(object.id-1);
-                                                    setIsVisible(!isVisible);
+                                                    setIsVisible(true);
                                                 }}
 
-                                                key={object.id}
+                                                key={index}
                                         >
                                             <View style={{marginBottom: 15}}>
                                                 <Image source={object.imgGray} style={{ maxWidth: '100%',height: 156}}/>
