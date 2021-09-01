@@ -117,7 +117,7 @@ const Principal = ({navigation, route}) => {
                 {texts.map((item, index) => (
                     <ScrollView contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}  key={index}>
                             <TabView.Item  key={item.id}>
-                                <View style={{flex: 1, padding: 20}}>
+                                <View style={{ padding: 20}}>
                                     <View style={{alignSelf: 'flex-start'}}>
                                         <Title title={item.title}/>
                                     </View>
