@@ -1,24 +1,41 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  ScrollView,
-  TouchableOpacity,
-  Text,
-  Image,
-  Linking,
-} from "react-native";
-import { Tab, Icon, TabView } from "react-native-elements";
+import { View, useWindowDimensions } from "react-native";
+import { TabView, SceneMap } from "react-native-tab-view";
 
-import ModalComponent from "../../components/ModalComponent";
+import Home from "./pages/Home";
+import Installations from "./pages/Installations";
+import MethodologicalSteps from "./pages/MethodologicalSteps";
+import Mounting from "./pages/Mounting";
+import Dismount from "./pages/Dismount";
+import Results from "./pages/Results";
+import Authors from "./pages/Authors";
+
 import Header from "../../components/Header";
-import Title from "../../components/Title";
-import Colors from "../../styles/colors";
-import texts from "../../utils/texts";
+import NavigationButtons from "../../components/NavigationButtons";
+
+const renderScene = SceneMap({
+  Home,
+  Installations,
+  MethodologicalSteps,
+  Mounting,
+  Dismount,
+  Results,
+  Authors,
+});
 
 const Principal = ({ navigation, route }) => {
   const [index, setIndex] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
-  const [currentID, setCurrentID] = useState(0);
+  const [routes] = useState([
+    { key: "Home" },
+    { key: "Installations" },
+    { key: "MethodologicalSteps" },
+    { key: "Mounting" },
+    { key: "Dismount" },
+    { key: "Results" },
+    { key: "Authors" },
+  ]);
+  const layout = useWindowDimensions();
+
   const { tab } = route.params;
 
   useEffect(() => {
@@ -28,7 +45,7 @@ const Principal = ({ navigation, route }) => {
   }, [tab]);
 
   const nextTab = () => {
-    if (index < texts.length - 1) {
+    if (index < routes.length - 1) {
       setIndex(index + 1);
     }
   };
@@ -41,215 +58,29 @@ const Principal = ({ navigation, route }) => {
     }
   };
 
-  const renderNextButton = () => {
-    return (
-      <TouchableOpacity
-        onPress={nextTab}
-        style={{
-          backgroundColor: Colors.primaryColor,
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "center",
-          borderWidth: 1,
-          borderColor: Colors.primaryColor,
-          height: 55,
-          marginLeft: 10,
-        }}
-      >
-        <Text
-          style={{
-            fontSize: 24,
-            color: "#FFF",
-            fontFamily: "NotoSans-Bold",
-          }}
-        >
-          Continuar
-        </Text>
-        <Icon name="chevron-right" type="material" size={30} color="#FFF" />
-      </TouchableOpacity>
-    );
-  };
+  console.log(index);
 
-  const renderPreviousButton = () => {
+  const renderButtons = () => {
     return (
-      <TouchableOpacity
-        onPress={previousTab}
-        style={{
-          backgroundColor: "#FFF",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "center",
-          borderWidth: 1,
-          borderColor: Colors.primaryColor,
-          height: 55,
-          marginLeft: 10,
-        }}
-      >
-        <Icon
-          name="chevron-left"
-          type="material"
-          size={30}
-          color={Colors.primaryColor}
-        />
-        <Text
-          style={{
-            fontSize: 24,
-            color: Colors.primaryColor,
-            fontFamily: "NotoSans-Bold",
-          }}
-        >
-          Voltar
-        </Text>
-      </TouchableOpacity>
+      <NavigationButtons
+        next={() => nextTab()}
+        previous={() => previousTab()}
+      />
     );
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#FFF" }}>
+    <View style={{ flex: 1 }}>
       <Header />
-      <TabView value={index}>
-        {texts.map((item, index) => (
-          <ScrollView
-            style={{flex: 1, flexGrow: 1}}
-            contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
-            key={index}
-          >
-            <TabView.Item key={item.id}>
-              <View style={{ padding: 20 }}>
-                <View style={{ alignSelf: "flex-start" }}>
-                  <Title title={item.title} />
-                </View>
-                <Text
-                  style={{
-                    fontFamily: "NotoSerif-Regular",
-                    fontSize: 18,
-                    textAlign: "left",
-                    marginTop: item.topics || item.authors ? -5 : 20,
-                  }}
-                >
-                  {item.text}
-                </Text>
-                {item.topics
-                  ? item.topics.map((topic, index) => (
-                      <View key={index}>
-                        <Text
-                          style={{
-                            fontFamily: "NotoSans-Bold",
-                            fontSize: 18,
-                          }}
-                        >
-                          {topic.subTitle}
-                        </Text>
-                        <Text
-                          style={{
-                            fontFamily: "NotoSerif-Regular",
-                            fontSize: 18,
-                            textAlign: "left",
-                            marginTop: 15,
-                          }}
-                        >
-                          {topic.topicText}
-                        </Text>
-                      </View>
-                    ))
-                  : null}
-                {item.objects
-                  ? item.objects.map((object, index) => (
-                      <TouchableOpacity
-                        style={{
-                          backgroundColor: Colors.grayColor,
-                          padding: 16,
-                          marginTop: 20,
-                          borderColor: "#ddd",
-                          shadowColor: "#000",
-                          shadowOpacity: 0.1,
-                          elevation: 2,
-                          borderBottomWidth: 0,
-                        }}
-                        onPress={() => {
-                          setCurrentID(object.id - 1);
-                          setIsVisible(true);
-                        }}
-                        key={index}
-                      >
-                        <View style={{ marginBottom: 15 }}>
-                          <Image
-                            source={object.imgGray}
-                            style={{ maxWidth: "100%", height: 156 }}
-                          />
-                        </View>
-                        <Text
-                          style={{
-                            fontFamily: "NotoSans-Bold",
-                            fontSize: 16,
-                          }}
-                        >
-                          {object.title}
-                        </Text>
-                      </TouchableOpacity>
-                    ))
-                  : null}
-
-                {item.authors
-                  ? item.authors.map((author) => (
-                      <View key={author.id} style={{ marginBottom: 20 }}>
-                        <Text
-                          style={{ fontFamily: "NotoSerif-Bold", fontSize: 18 }}
-                        >
-                          {author.name}
-                        </Text>
-                        <Text
-                          style={{
-                            fontFamily: "NotoSerif-Regular",
-                            fontSize: 18,
-                          }}
-                        >
-                          {author.abstract}
-                        </Text>
-                        <TouchableOpacity
-                          onPress={() => Linking.openURL(`${author.link}`)}
-                          style={{ marginTop: 15 }}
-                        >
-                          <Text
-                            style={{
-                              fontFamily: "NotoSerif-Regular",
-                              fontSize: 18,
-                              textDecorationLine: "underline",
-                              color: Colors.secondaryColor,
-                            }}
-                          >
-                            {author.link}
-                          </Text>
-                        </TouchableOpacity>
-                      </View>
-                    ))
-                  : null}
-              </View>
-            </TabView.Item>
-          </ScrollView>
-        ))}
-      </TabView>
-      <View style={{ padding: 16 }}>
-        <Tab value={index} disableIndicator>
-          <Tab.Item
-            TouchableComponent={renderPreviousButton}
-            containerStyle={{
-              backgroundColor: "transparent",
-            }}
-          />
-          <Tab.Item
-            TouchableComponent={renderNextButton}
-            containerStyle={{
-              backgroundColor: "transparent",
-            }}
-          />
-        </Tab>
-      </View>
-
-      <ModalComponent
-        visible={isVisible}
-        hideModal={() => setIsVisible(false)}
-        id={currentID}
+      <TabView
+        navigationState={{ index, routes }}
+        renderScene={renderScene}
+        swipeEnabled={false}
+        onIndexChange={setIndex}
+        initialLayout={{ flex: 1, height: layout.height }}
+        renderTabBar={renderButtons}
+        tabBarPosition="bottom"
+        transitionStyle="curl"
       />
     </View>
   );
