@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { View, useWindowDimensions } from "react-native";
 import { TabView, SceneMap } from "react-native-tab-view";
 
@@ -12,6 +12,7 @@ import Authors from "./pages/Authors";
 
 import Header from "../../components/Header";
 import NavigationButtons from "../../components/NavigationButtons";
+import { Context } from "../../Context/RoutesContext";
 
 const renderScene = SceneMap({
   Home,
@@ -23,7 +24,8 @@ const renderScene = SceneMap({
   Authors,
 });
 
-const Principal = ({ navigation, route }) => {
+const Principal = ({ navigation }) => {
+  const { routeIndex } = useContext(Context);
   const [index, setIndex] = useState(0);
   const [routes] = useState([
     { key: "Home" },
@@ -35,14 +37,6 @@ const Principal = ({ navigation, route }) => {
     { key: "Authors" },
   ]);
   const layout = useWindowDimensions();
-
-  const { tab } = route.params;
-
-  useEffect(() => {
-    if (tab) {
-      setIndex(tab - 1);
-    }
-  }, [tab]);
 
   const nextTab = () => {
     if (index < routes.length - 1) {
@@ -58,7 +52,9 @@ const Principal = ({ navigation, route }) => {
     }
   };
 
-  console.log(index);
+  useEffect(() => {
+    setIndex(routeIndex.index);
+  }, [routeIndex.switch]);
 
   const renderButtons = () => {
     return (
