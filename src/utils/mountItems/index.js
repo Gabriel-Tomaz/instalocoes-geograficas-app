@@ -44,7 +44,7 @@ const moutItems = [
 
         ],
         img: require('../../assets/img/image2.jpg'),
-        imgGray: require('../../assets/img/tumb2.png')
+        imgGray: require('../../assets/img/tumb2.jpg')
     },
 
     {

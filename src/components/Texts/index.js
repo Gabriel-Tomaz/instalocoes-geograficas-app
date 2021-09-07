@@ -72,7 +72,7 @@ const Texts = ({ index }) => {
                   style={{
                     backgroundColor: Colors.grayColor,
                     padding: 16,
-                    marginBottom: 25,
+                    marginBottom: 30,
                     borderColor: "#ddd",
                     shadowColor: "#000",
                     shadowOpacity: 0.1,
@@ -85,10 +85,10 @@ const Texts = ({ index }) => {
                   }}
                   key={objIndex}
                 >
-                  <View style={{ marginBottom: 15 }}>
+                  <View style={{ marginBottom: 15, justifyContent: 'center', alignItems: 'center'}}>
                     <Image
                       source={object.imgGray}
-                      style={{ maxWidth: "100%", height: 156 }}
+                      style={{ width: "100%", height: 218 }}
                     />
                   </View>
                   <Text
