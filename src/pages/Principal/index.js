@@ -76,7 +76,7 @@ const Principal = ({ navigation, route }) => {
         navigationState={{ index, routes }}
         renderScene={renderScene}
         swipeEnabled={false}
-        onIndexChange={setIndex}
+        onIndexChange={() => {}}
         initialLayout={{ flex: 1, height: layout.height }}
         renderTabBar={renderButtons}
         tabBarPosition="bottom"
