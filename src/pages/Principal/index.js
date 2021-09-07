@@ -25,7 +25,7 @@ const renderScene = SceneMap({
 });
 
 const Principal = ({ navigation }) => {
-  const { routeIndex } = useContext(Context);
+  const {routeIndex} = useContext(Context);
   const [index, setIndex] = useState(0);
   const [routes] = useState([
     { key: "Home" },
@@ -54,8 +54,8 @@ const Principal = ({ navigation }) => {
 
   useEffect(() => {
     setIndex(routeIndex.index);
-  }, [routeIndex.switch]);
-
+  }, [routeIndex.switch])
+  
   const renderButtons = () => {
     return (
       <NavigationButtons
