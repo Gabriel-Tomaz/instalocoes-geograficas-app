@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import { View, useWindowDimensions } from "react-native";
+import React, { useState, useEffect, useContext, useRef } from "react";
+import { View, useWindowDimensions, Animated } from "react-native";
 import { TabView, SceneMap } from "react-native-tab-view";
 
 import Home from "./pages/Home";
@@ -25,7 +25,7 @@ const renderScene = SceneMap({
 });
 
 const Principal = ({ navigation }) => {
-  const {routeIndex} = useContext(Context);
+  const { routeIndex } = useContext(Context);
   const [index, setIndex] = useState(0);
   const [routes] = useState([
     { key: "Home" },
@@ -54,8 +54,8 @@ const Principal = ({ navigation }) => {
 
   useEffect(() => {
     setIndex(routeIndex.index);
-  }, [routeIndex.switch])
-  
+  }, [routeIndex.switch]);
+
   const renderButtons = () => {
     return (
       <NavigationButtons
@@ -65,19 +65,40 @@ const Principal = ({ navigation }) => {
     );
   };
 
+  const FadeInView = (props) => {
+    const fadeAnim = useRef(new Animated.Value(0)).current;
+
+    useEffect(() => {
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 500,
+        useNativeDriver: true
+      }).start();
+    }, [fadeAnim]);
+
+    return (
+      <Animated.View style={{ ...props.style, opacity: fadeAnim, flex: 1 }}>
+        {props.children}
+      </Animated.View>
+    );
+  };
+
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: "#FFF" }}>
       <Header />
-      <TabView
-        navigationState={{ index, routes }}
-        renderScene={renderScene}
-        swipeEnabled={false}
-        onIndexChange={() => {}}
-        initialLayout={{ flex: 1, height: layout.height }}
-        renderTabBar={renderButtons}
-        tabBarPosition="bottom"
-        transitionStyle="curl"
-      />
+      <FadeInView style={{flex: 1}}>
+        <TabView
+          navigationState={{ index, routes }}
+          renderScene={renderScene}
+          swipeEnabled={true}
+          onIndexChange={() => {}}
+          initialLayout={{ flex: 1, height: layout.height }}
+          renderTabBar={() => {}}
+          tabBarPosition="bottom"
+          transitionStyle="curl"
+        />
+      </FadeInView>
+      {renderButtons()}
     </View>
   );
 };
