@@ -90,7 +90,7 @@ const Principal = ({ navigation }) => {
         <TabView
           navigationState={{ index, routes }}
           renderScene={renderScene}
-          swipeEnabled={true}
+          swipeEnabled={false}
           onIndexChange={() => {}}
           initialLayout={{ flex: 1, height: layout.height }}
           renderTabBar={() => {}}
