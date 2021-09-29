@@ -61,6 +61,7 @@ const Principal = ({ navigation }) => {
       <NavigationButtons
         next={() => nextTab()}
         previous={() => previousTab()}
+        disabled={index >= routes.length -1}
       />
     );
   };
