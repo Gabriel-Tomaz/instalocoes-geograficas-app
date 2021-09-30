@@ -12,6 +12,8 @@ const ModalComponent = ({ id, visible, hideModal }) => {
       transparent={true}
       animationIn="fadeInLeft"
       animationOut="fadeOutRight"
+      onBackdropPress={hideModal}
+
     >
       <View style={{ flex: 1, justifyContent: "center" }}>
         <View style={{ padding: 16, backgroundColor: "#FFF" }}>
