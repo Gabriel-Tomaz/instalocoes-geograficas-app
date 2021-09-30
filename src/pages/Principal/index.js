@@ -1,243 +1,107 @@
-import React, {useState, useEffect} from 'react';
-import { View, ScrollView, TouchableOpacity,Text, Image, Linking } from 'react-native';
-import {Tab, Icon, TabView} from 'react-native-elements';
-import GestureRecognizer from 'react-native-swipe-gestures';
+import React, { useState, useEffect, useContext, useRef } from "react";
+import { View, useWindowDimensions, Animated } from "react-native";
+import { TabView, SceneMap } from "react-native-tab-view";
 
+import Home from "./pages/Home";
+import Installations from "./pages/Installations";
+import MethodologicalSteps from "./pages/MethodologicalSteps";
+import Mounting from "./pages/Mounting";
+import Dismount from "./pages/Dismount";
+import Results from "./pages/Results";
+import Authors from "./pages/Authors";
 
-import ModalComponent from '../../components/ModalComponent';
-import Header from '../../components/Header';
-import Title from '../../components/Title';
-import Colors from '../../styles/colors';
-import texts from '../../utils/texts';
+import Header from "../../components/Header";
+import NavigationButtons from "../../components/NavigationButtons";
+import { Context } from "../../Context/RoutesContext";
 
-const Principal = ({navigation, route}) => {
-    const [index,setIndex] = useState(0);
-    const [isVisible, setIsVisible] = useState(false);
-    const [currentID,setCurrentID] = useState(0);
-    const {tab} = route.params;
-    
+const renderScene = SceneMap({
+  Home,
+  Installations,
+  MethodologicalSteps,
+  Mounting,
+  Dismount,
+  Results,
+  Authors,
+});
+
+const Principal = ({ navigation }) => {
+  const { routeIndex } = useContext(Context);
+  const [index, setIndex] = useState(0);
+  const [routes] = useState([
+    { key: "Home" },
+    { key: "Installations" },
+    { key: "MethodologicalSteps" },
+    { key: "Mounting" },
+    { key: "Dismount" },
+    { key: "Results" },
+    { key: "Authors" },
+  ]);
+  const layout = useWindowDimensions();
+
+  const nextTab = () => {
+    if (index < routes.length - 1) {
+      setIndex(index + 1);
+    }
+  };
+  const previousTab = () => {
+    if (index !== 0) {
+      setIndex(index - 1);
+    }
+    if (index === 0) {
+      navigation.goBack();
+    }
+  };
+
+  useEffect(() => {
+    setIndex(routeIndex.index);
+  }, [routeIndex.switch]);
+
+  const renderButtons = () => {
+    return (
+      <NavigationButtons
+        next={() => nextTab()}
+        previous={() => previousTab()}
+        disabled={index >= routes.length -1}
+      />
+    );
+  };
+
+  const FadeInView = (props) => {
+    const fadeAnim = useRef(new Animated.Value(0)).current;
+
     useEffect(() => {
-        if(tab){
-            setIndex(tab-1);
-        }
-    }, [tab])
-
-    const nextTab = () => {
-        if(index < texts.length -1){
-            setIndex(index+1);
-        }
-    };
-    const previousTab = () => {
-        if(index !== 0){
-            setIndex(index-1);
-        }
-        if(index === 0){
-            navigation.goBack();
-        }
-    };
-
-    const onSwipeRight = () => {
-        if(index !== 0){
-            setIndex(index-1);
-        }
-        if(index === 0){
-            navigation.goBack();
-        }
-    }
-
-    const onSwipeLeft = () => {
-        if(index < texts.length -1){
-            setIndex(index+1);
-        }
-    }
-
-    const renderNextButton = () => {
-        return(
-            <TouchableOpacity
-                onPress={nextTab}
-                style={{
-                    backgroundColor: Colors.primaryColor,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    borderWidth: 1,
-                    borderColor: Colors.primaryColor,
-                    height: 55,
-                    marginLeft: 10,
-                }}    
-            >
-                <Text
-                    style={{
-                        fontSize: 24,
-                        color: '#FFF',
-                        fontFamily: 'NotoSans-Bold',
-                    }}
-                >Continuar</Text>
-                <Icon name="chevron-right" type="material" size={30} color="#FFF"/>
-            </TouchableOpacity>
-        );
-    }
-
-    const renderPreviousButton = () => {
-        return(
-            <TouchableOpacity
-                onPress={previousTab}
-                style={{
-                    backgroundColor: '#FFF',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    borderWidth: 1,
-                    borderColor: Colors.primaryColor,
-                    height: 55,
-                    marginLeft: 10,
-                }}    
-            >
-                 <Icon name="chevron-left" type="material" size={30} color={Colors.primaryColor}/>
-                <Text
-                    style={{
-                        fontSize: 24,
-                        color: Colors.primaryColor,
-                        fontFamily: 'NotoSans-Bold',
-                    }}
-                >Voltar</Text>
-            </TouchableOpacity>
-        );
-    }
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 500,
+        useNativeDriver: true
+      }).start();
+    }, [fadeAnim]);
 
     return (
-        <View style={{flex: 1, backgroundColor: '#FFF'}}>
-            <Header />
-            <GestureRecognizer
-                style={{flex: 1}}
-                onSwipeLeft={onSwipeLeft}
-                onSwipeRight={onSwipeRight}
-            >
-                <TabView value={index}>
-                {texts.map((item, index) => (
-                    <ScrollView contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}  key={index}>
-                            <TabView.Item  key={item.id}>
-                                <View style={{flex: 1, padding: 20}}>
-                                    <View style={{alignSelf: 'flex-start'}}>
-                                        <Title title={item.title}/>
-                                    </View>
-                                    <Text 
-                                        style={{
-                                            fontFamily: 'NotoSerif-Regular', 
-                                            fontSize: 18, 
-                                            textAlign: 'left',
-                                            marginTop: item.topics || item.authors ? -5 : 20
-                                        }}
-                                    >
-                                        {item.text}
-                                    </Text>
-                                    {item.topics ? (
-                                        item.topics.map((topic, index) => (
-                                        <View key={index}>
-                                                <Text 
-                                                    style={{
-                                                        fontFamily: 'NotoSans-Bold',
-                                                        fontSize: 18,
-                                                    }}
-                                                >
-                                                    {topic.subTitle}
-                                                </Text>
-                                                <Text
-                                                    style={{
-                                                        fontFamily: 'NotoSerif-Regular', 
-                                                        fontSize: 18, 
-                                                        textAlign: 'left', 
-                                                        marginTop: 15
-                                                    }}
-                                                >
-                                                    {topic.topicText}
-                                                </Text>
-                                        </View>
-                                        ))
-                                    ): null}
-                                    {item.objects ? (
-                                        item.objects.map((object, index) => (
-                                        <TouchableOpacity 
-                                                style={{
-                                                    backgroundColor: Colors.grayColor,
-                                                    padding: 16,
-                                                    marginTop: 20,
-                                                    borderColor: '#ddd',
-                                                    shadowColor: '#000',
-                                                    shadowOpacity: 0.1,
-                                                    elevation: 2,
-                                                    borderBottomWidth: 0,
-                                                }}
-
-                                                onPress={() => {
-                                                    setCurrentID(object.id-1);
-                                                    setIsVisible(true);
-                                                }}
-
-                                                key={index}
-                                        >
-                                            <View style={{marginBottom: 15}}>
-                                                <Image source={object.imgGray} style={{ maxWidth: '100%',height: 156}}/>
-                                            </View>
-                                            <Text style={{
-                                                fontFamily: 'NotoSans-Bold',
-                                                fontSize: 16,
-                                            }}>{object.title}</Text>
-                                        </TouchableOpacity>
-                                        ))
-                                    ) : null}
-
-                                    {item.authors ? (
-                                        item.authors.map(author => (
-                                            <View key={author.id} style={{marginBottom: 20}}>
-                                                <Text style={{fontFamily: 'NotoSerif-Bold', fontSize: 18}}>{author.name}</Text>
-                                                <Text style={{fontFamily: 'NotoSerif-Regular', fontSize: 18}}>{author.abstract}</Text>
-                                                <TouchableOpacity onPress={() => Linking.openURL(`${author.link}`)} style={{marginTop: 15}}> 
-                                                    <Text 
-                                                        style={{
-                                                            fontFamily: 'NotoSerif-Regular',
-                                                            fontSize: 18,
-                                                            textDecorationLine: 'underline',
-                                                            color: Colors.secondaryColor,
-                                                        }}
-                                                    >
-                                                        {author.link}
-                                                    </Text>
-                                                </TouchableOpacity>
-                                            </View>
-                                        ))
-                                    ) : null}
-                                </View>
-                            </TabView.Item>
-                    </ScrollView>
-                ))}
-                </TabView>
-            </GestureRecognizer>
-            <View style={{padding: 16}}>
-                <Tab value={index} disableIndicator>
-                    <Tab.Item 
-                        TouchableComponent={renderPreviousButton}
-                        containerStyle={{
-                            backgroundColor: 'transparent'
-                        }}
-                    />
-                    <Tab.Item 
-                        TouchableComponent={renderNextButton}
-                        containerStyle={{
-                            backgroundColor: 'transparent'
-                        }}
-                    />
-                </Tab>
-            </View>
-
-            <ModalComponent 
-                visible={isVisible} 
-                hideModal={() => setIsVisible(false)}
-                id={currentID}
-            />
-
-        </View>
+      <Animated.View style={{ ...props.style, opacity: fadeAnim, flex: 1 }}>
+        {props.children}
+      </Animated.View>
     );
+  };
+
+  return (
+    <View style={{ flex: 1, backgroundColor: "#FFF" }}>
+      <Header />
+      <FadeInView style={{flex: 1}}>
+        <TabView
+          navigationState={{ index, routes }}
+          renderScene={renderScene}
+          swipeEnabled={false}
+          onIndexChange={() => {}}
+          initialLayout={{ flex: 1, height: layout.height }}
+          renderTabBar={() => {}}
+          tabBarPosition="bottom"
+          transitionStyle="curl"
+        />
+      </FadeInView>
+      {renderButtons()}
+    </View>
+  );
 };
- 
+
 export default Principal;
